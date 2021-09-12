@@ -4,34 +4,25 @@ import java.util.Arrays;
 
 public class 回顾 {
     public static void main(String[] args) {
-        System.out.println(strStr("adcababcdab", "ababc"));
+        String text1="abcde";
+        String text2 = "ace";
+        System.out.println(longestCommonSubsequence(text1, text2));
 
     }
-    static public int strStr(String s, String p){
-        int m=s.length(), n=p.length();
-        int[] pi = new int[n];
-        int j=0;
-        for (int i = 1; i < n; i++) {
-            while (j!=0 && p.charAt(i)!=p.charAt(j)){
-                j = pi[j-1];
-            }
-            if(p.charAt(i)==p.charAt(j)){
-                j++;
-            }
-            pi[i] = j;
-        }
-
+    static
+    public int longestCommonSubsequence(String text1, String text2) {
+        int m = text1.length();
+        int n = text2.length();
+        int[][] dp = new int[m + 1][n + 1];
         for (int i = 0; i < m; i++) {
-            while(j!=0 && s.charAt(i)!=p.charAt(j)){
-                j = pi[j-1];
-            }
-            if(s.charAt(i)==p.charAt(j)){
-                if(++j==n){
-                    return i-j+1;
+            for (int j = 0; j < n; j++) {
+                if(text1.charAt(i)==text2.charAt(j)){
+                    dp[i+1][j+1] = dp[i][j]+1;
+                } else {
+                    dp[i+1][j+1] = Math.max(dp[i+1][j], dp[i][j+1]);
                 }
             }
         }
-        return -1;
+        return dp[m][n];
     }
-
 }
