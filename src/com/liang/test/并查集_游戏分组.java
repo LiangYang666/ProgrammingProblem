@@ -15,8 +15,6 @@ public class 并查集_游戏分组 {
             return find(m.get(name));
         }
     }
-
-
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         int N = Integer.parseInt(scanner.nextLine().trim());
