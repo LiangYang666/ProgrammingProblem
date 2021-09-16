@@ -3,6 +3,7 @@ package com.liang.normal;
 import javafx.util.Pair;
 
 import java.util.HashMap;
+import java.util.HashSet;
 
 public class MIndex200岛屿数量 {
 
@@ -12,52 +13,69 @@ public class MIndex200岛屿数量 {
           ["1","1","0","1","0"],
           ["1","1","0","0","0"],
           ["0","0","0","0","0"]
-
          */
         char[][] grid = {
                         {'1', '1', '1', '1', '0'},
                         {'1', '1', '0', '1', '0'},
-                        {'1', '1', '0', '0', '0'},
+                        {'1', '1', '0', '0', '1'},
                         {'0', '0', '0', '0', '0'}};
-        XY xy1 = new XY(1, 2);
-        XY xy2 = new XY(7, 9);
-        XY xy3 = new XY(9, 7);
-        HashMap<XY, Integer> map = new HashMap<>();
-        map.put(xy1, 1);
-        map.put(xy2, 2);
-        map.put(xy3, 3);
-        System.out.println(map.get(new XY(1, 3)));
-        System.out.println(map.get(new XY(7, 9)));
-        System.out.println(map.get(new XY(9, 7)));
 
-//        System.out.println(numIslands(grid));
+//        char[][] grid = {{'1'}};
+
+        System.out.println(numIslands(grid));
     }
-    static HashMap<Integer, Integer> m = new HashMap<>();
+    static HashMap<Integer, Integer> map = new HashMap<>();
+    static HashMap<XY, Integer> locMap = new HashMap<>();
 
     static
     public int numIslands(char[][] grid) {
 //        HashMap<Integer, XY> locMap = new HashMap<>();
-        HashMap<XY, Integer> locMap = new HashMap<>();
+        int m = grid.length;
+        int n = grid[0].length;
         int k = 0;
-        for (int i = 0; i < grid.length; i++) {
-            for (int j = 0; j < grid[0].length; j++) {
+        //第一步初始化所有map
+        for (int i = 0; i < m; i++) {
+            for (int j = 0; j < n; j++) {
                 if(grid[i][j]=='1'){
                     locMap.put(new XY(i, j), k);
-//                    locMap.get()
-                    m.put(k, k);
+                    map.put(k, k);
                     k++;
                 }
             }
         }
-        return 0;
+        //第二步 合并
+        for (int i = 0; i < m; i++) {
+            for (int j = 0; j < n; j++) {
+                if(grid[i][j]=='1'){
+                    int locIndex = locMap.get(new XY(i, j));
+                    merge4Ori(grid, locIndex, i-1, j, m, n);
+                    merge4Ori(grid, locIndex, i+1, j, m, n);
+                    merge4Ori(grid, locIndex, i, j-1, m, n);
+                    merge4Ori(grid, locIndex, i, j+1, m, n);
+                }
+            }
+        }
+        HashSet<Integer> rs = new HashSet<>();
+        for (Integer key : map.keySet()) {
+            rs.add(find(key));
+        }
+
+        return rs.size();
+    }
+    static
+    public void merge4Ori(char[][]grid, int x, int i, int j, int m, int n){
+        if(i<0 || j<0 || i>=m || j>=n)    return;
+        if(grid[i][j]=='1'){
+            map.put(find(locMap.get(new XY(i, j))), find(x));
+        }
     }
 
     static
     public int find(int x){
-        if(x==m.get(x)){
+        if(x==map.get(x)){
             return x;
         } else {
-            return find(x);
+            return find(map.get(x));
         }
     }
 
