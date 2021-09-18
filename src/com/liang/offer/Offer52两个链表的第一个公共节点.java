@@ -35,4 +35,24 @@ public class Offer52两个链表的第一个公共节点 {
         }
         return null;
     }
+
+    public ListNode getIntersectionNode1(ListNode headA, ListNode headB) {  //方法二 双指针法
+        ListNode pA=headA, pB=headB;
+        if(pA==null || pB==null)    return null;
+        while(true){
+            if(pA==null && pB==null){
+                break;
+            } else if(pA==null){
+                pA=headB;
+            } else if(pB==null){
+                pB=headA;
+            }
+            if(pA==pB){
+                return pA;
+            }
+            pA = pA.next;
+            pB = pB.next;
+        }
+        return null;
+    }
 }
