@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class Index863二叉树中所有距离为K的结点 {
+public class MIndex863二叉树中所有距离为K的结点 {
     int N=501;
     int[] first = new int[N];
     int[] to = new int[N*3];
@@ -83,7 +83,7 @@ public class Index863二叉树中所有距离为K的结点 {
         BinaryTree binaryTree = new BinaryTree();
         String[] s = {"[]", "[3,5,1,6,2,0,8,null,null,7,4]", "[3,5]", "[0,1,null,null,2,null,3,null,4]" };
         TreeNode tree = binaryTree.createTree(s[1]);
-        Index863二叉树中所有距离为K的结点 code = new Index863二叉树中所有距离为K的结点();
+        MIndex863二叉树中所有距离为K的结点 code = new MIndex863二叉树中所有距离为K的结点();
         System.out.println(code.distanceK(tree, new TreeNode(5), 2).toString());
     }
 }
