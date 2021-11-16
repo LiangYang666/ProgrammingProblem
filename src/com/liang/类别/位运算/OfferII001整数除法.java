@@ -1,6 +1,4 @@
-package com.liang.位运算;
-
-import java.util.ArrayList;
+package com.liang.类别.位运算;
 
 public class OfferII001整数除法 {
     public static void main(String[] args) {

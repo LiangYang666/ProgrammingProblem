@@ -1,4 +1,4 @@
-package com.liang.字符串;
+package com.liang.类别.字符串;
 
 public class Index520检测大写字母 {
     public static void main(String[] args) {

@@ -1,4 +1,4 @@
-package com.liang.位运算;
+package com.liang.类别.位运算;
 
 public class Index67二进制求和 {
     public String addBinary(String a, String b) {
