@@ -8,6 +8,7 @@ public class S001整数除法 {
     static
     public int divide(int a, int b) {
         int res = 0;
+        // 特殊情况讨论
         if (a==Integer.MIN_VALUE) {
             if (b==-1)  return Integer.MAX_VALUE;
             else if(b==1)   return Integer.MIN_VALUE;
@@ -20,8 +21,8 @@ public class S001整数除法 {
         System.out.println(a);
         if(b==Integer.MIN_VALUE) return 0;
         if(a==0)    return 0;
-
         boolean sign = (a < 0) == (b < 0);
+        //运算
         a = Math.abs(a);
         b = Math.abs(b);
         String bStr = Integer.toBinaryString(b);
@@ -29,7 +30,6 @@ public class S001整数除法 {
         int bitNow = 31-(bStr.length()-index);
         System.out.println(bitNow);
         while(bitNow>=0){
-//            System.out.println(Integer.toBinaryString(b<<bitNow));
             if (b<<bitNow <a){
                 a -= b<<bitNow;
                 res += 1<<bitNow;
