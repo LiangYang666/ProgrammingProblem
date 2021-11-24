@@ -1,0 +1,253 @@
+show databases;
+create database study34;
+use study34;
+DROP TABLE IF EXISTS EMP;
+DROP TABLE IF EXISTS DEPT;
+DROP TABLE IF EXISTS SALGRADE;
+
+CREATE TABLE DEPT
+(DEPTNO int(2) not null ,
+ DNAME VARCHAR(14) ,
+ LOC VARCHAR(13),
+ primary key (DEPTNO)
+);
+
+CREATE TABLE EMP
+(EMPNO int(4)  not null ,
+ ENAME VARCHAR(10),
+ JOB VARCHAR(9),
+ MGR INT(4),
+ HIREDATE DATE  DEFAULT NULL,
+ SAL DOUBLE(7,2),
+ COMM DOUBLE(7,2),
+ primary key (EMPNO),
+ DEPTNO INT(2)
+);
+
+CREATE TABLE SALGRADE
+( GRADE INT,
+  LOSAL INT,
+  HISAL INT );
+
+
+INSERT INTO DEPT ( DEPTNO, DNAME, LOC ) VALUES (
+                                                   10, 'ACCOUNTING', 'NEW YORK');
+INSERT INTO DEPT ( DEPTNO, DNAME, LOC ) VALUES (
+                                                   20, 'RESEARCH', 'DALLAS');
+INSERT INTO DEPT ( DEPTNO, DNAME, LOC ) VALUES (
+                                                   30, 'SALES', 'CHICAGO');
+INSERT INTO DEPT ( DEPTNO, DNAME, LOC ) VALUES (
+                                                   40, 'OPERATIONS', 'BOSTON');
+commit;
+
+INSERT INTO EMP ( EMPNO, ENAME, JOB, MGR, HIREDATE, SAL, COMM,
+                  DEPTNO ) VALUES (
+                                      7369, 'SMITH', 'CLERK', 7902,  '1980-12-17'
+                                  , 800, NULL, 20);
+INSERT INTO EMP ( EMPNO, ENAME, JOB, MGR, HIREDATE, SAL, COMM,
+                  DEPTNO ) VALUES (
+                                      7499, 'ALLEN', 'SALESMAN', 7698,  '1981-02-20'
+                                  , 1600, 300, 30);
+INSERT INTO EMP ( EMPNO, ENAME, JOB, MGR, HIREDATE, SAL, COMM,
+                  DEPTNO ) VALUES (
+                                      7521, 'WARD', 'SALESMAN', 7698,  '1981-02-22'
+                                  , 1250, 500, 30);
+INSERT INTO EMP ( EMPNO, ENAME, JOB, MGR, HIREDATE, SAL, COMM,
+                  DEPTNO ) VALUES (
+                                      7566, 'JONES', 'MANAGER', 7839,  '1981-04-02'
+                                  , 2975, NULL, 20);
+INSERT INTO EMP ( EMPNO, ENAME, JOB, MGR, HIREDATE, SAL, COMM,
+                  DEPTNO ) VALUES (
+                                      7654, 'MARTIN', 'SALESMAN', 7698,  '1981-09-28'
+                                  , 1250, 1400, 30);
+INSERT INTO EMP ( EMPNO, ENAME, JOB, MGR, HIREDATE, SAL, COMM,
+                  DEPTNO ) VALUES (
+                                      7698, 'BLAKE', 'MANAGER', 7839,  '1981-05-01'
+                                  , 2850, NULL, 30);
+INSERT INTO EMP ( EMPNO, ENAME, JOB, MGR, HIREDATE, SAL, COMM,
+                  DEPTNO ) VALUES (
+                                      7782, 'CLARK', 'MANAGER', 7839,  '1981-06-09'
+                                  , 2450, NULL, 10);
+INSERT INTO EMP ( EMPNO, ENAME, JOB, MGR, HIREDATE, SAL, COMM,
+                  DEPTNO ) VALUES (
+                                      7788, 'SCOTT', 'ANALYST', 7566,  '1987-04-19'
+                                  , 3000, NULL, 20);
+INSERT INTO EMP ( EMPNO, ENAME, JOB, MGR, HIREDATE, SAL, COMM,
+                  DEPTNO ) VALUES (
+                                      7839, 'KING', 'PRESIDENT', NULL,  '1981-11-17'
+                                  , 5000, NULL, 10);
+INSERT INTO EMP ( EMPNO, ENAME, JOB, MGR, HIREDATE, SAL, COMM,
+                  DEPTNO ) VALUES (
+                                      7844, 'TURNER', 'SALESMAN', 7698,  '1981-09-08'
+                                  , 1500, 0, 30);
+INSERT INTO EMP ( EMPNO, ENAME, JOB, MGR, HIREDATE, SAL, COMM,
+                  DEPTNO ) VALUES (
+                                      7876, 'ADAMS', 'CLERK', 7788,  '1987-05-23'
+                                  , 1100, NULL, 20);
+INSERT INTO EMP ( EMPNO, ENAME, JOB, MGR, HIREDATE, SAL, COMM,
+                  DEPTNO ) VALUES (
+                                      7900, 'JAMES', 'CLERK', 7698,  '1981-12-03'
+                                  , 950, NULL, 30);
+INSERT INTO EMP ( EMPNO, ENAME, JOB, MGR, HIREDATE, SAL, COMM,
+                  DEPTNO ) VALUES (
+                                      7902, 'FORD', 'ANALYST', 7566,  '1981-12-03'
+                                  , 3000, NULL, 20);
+INSERT INTO EMP ( EMPNO, ENAME, JOB, MGR, HIREDATE, SAL, COMM,
+                  DEPTNO ) VALUES (
+                                      7934, 'MILLER', 'CLERK', 7782,  '1982-01-23'
+                                  , 1300, NULL, 10);
+commit;
+
+INSERT INTO SALGRADE ( GRADE, LOSAL, HISAL ) VALUES (
+                                                        1, 700, 1200);
+INSERT INTO SALGRADE ( GRADE, LOSAL, HISAL ) VALUES (
+                                                        2, 1201, 1400);
+INSERT INTO SALGRADE ( GRADE, LOSAL, HISAL ) VALUES (
+                                                        3, 1401, 2000);
+INSERT INTO SALGRADE ( GRADE, LOSAL, HISAL ) VALUES (
+                                                        4, 2001, 3000);
+INSERT INTO SALGRADE ( GRADE, LOSAL, HISAL ) VALUES (
+                                                        5, 3001, 9999);
+commit;
+
+
+# =================================================================///
+# 1、取得每个部门最高薪水的人员名称
+select d.* from DEPT d;
+select  d.DNAME, max(SAL) from EMP e join DEPT d on e.DEPTNO=d.DEPTNO group by DNAME;
+select d.DNAME, t.*
+from
+     (select e.DEPTNO, max(SAL) from EMP e group by e.DEPTNO) t
+join DEPT d on t.DEPTNO=d.DEPTNO;
+
+select e.ENAME, t.*
+from  EMP e
+join
+(select e.DEPTNO, max(SAL) max_sal from EMP e group by e.DEPTNO) t
+on t.max_sal=e.SAL and t.DEPTNO=e.DEPTNO;
+
+# 2、哪些人的薪水在部门的平均薪水之上
+select e.ENAME
+from EMP e join
+(select e.DEPTNO, avg(e.SAL) avgsal from EMP e group by e.DEPTNO) t
+on e.DEPTNO=t.DEPTNO
+where e.SAL>=t.avgsal;
+
+# 3.取得部门中（所有人的）平均的薪水等级
+select * from SALGRADE;
+select DEPTNO, avg(GRADE)
+from EMP e
+    join SALGRADE s on (e.SAL<=s.HISAL and e.SAL>=s.LOSAL)
+group by e.DEPTNO;
+
+# 4、不准用组函数（Max ），取得最高薪水
+select e.SAL
+from EMP e
+order by
+e.SAL desc
+limit 0,1;
+
+# 自连接
+select e.SAL from EMP e
+where e.SAL
+          not in (select distinct a.SAL from EMP a
+                    join EMP b on a.SAL<b.SAL);
+
+# 5、取得平均薪水最高的部门的部门编号
+select DEPTNO, avg(e.SAL) avg_sal from EMP e group by DEPTNO
+order by avg_sal desc
+limit 0, 1;
+
+select max(t.avg_sal)
+from
+    (select avg(e.SAL) avg_sal
+    from EMP e group by DEPTNO) t;
+
+# 6、取得平均薪水最高的部门的部门名称
+select d.DEPTNO, d.DNAME from
+        (select DEPTNO, avg(e.SAL) avg_sal from EMP e group by DEPTNO
+        order by avg_sal desc
+        limit 0, 1) t
+join DEPT d on d.DEPTNO=t.DEPTNO;
+
+
+select d.DNAME, d.DEPTNO, avg(sal) avg_sal
+from EMP e
+join DEPT d on e.DEPTNO=d.DEPTNO
+group by d.DEPTNO
+order by avg_sal desc
+limit 1;
+
+# 7、求平均薪水的等级最低的部门的部门名称
+# 平均薪水是800
+# 平均薪水是900
+# 那么他俩都是1级别。
+select t.DNAME, t.DEPTNO, s.GRADE
+from
+    (select d.DNAME ,e.DEPTNO, avg(e.SAL) avg_sal
+     from EMP e
+              join DEPT d on e.DEPTNO = d.DEPTNO
+     group by e.DEPTNO) t
+join SALGRADE s on t.avg_sal<=s.HISAL and t.avg_sal>=s.LOSAL
+right join
+    (select min(s.GRADE) min_grade
+    from
+        (select d.DNAME ,e.DEPTNO, avg(e.SAL) avg_sal
+        from EMP e
+        join DEPT d on e.DEPTNO = d.DEPTNO
+        group by e.DEPTNO) t
+    join SALGRADE s on t.avg_sal<=s.HISAL and t.avg_sal>=s.LOSAL) tt
+on tt.min_grade=s.GRADE;
+
+select t.*, s.GRADE
+from
+    (select d.DNAME ,e.DEPTNO, avg(e.SAL) avg_sal
+    from EMP e
+          join DEPT d on e.DEPTNO = d.DEPTNO
+    group by e.DEPTNO) t
+join SALGRADE s on t.avg_sal<=s.HISAL and t.avg_sal>=s.LOSAL
+where s.GRADE=
+    (select min(s.GRADE) min_grade
+     from
+         (select d.DNAME ,e.DEPTNO, avg(e.SAL) avg_sal
+          from EMP e
+                   join DEPT d on e.DEPTNO = d.DEPTNO
+          group by e.DEPTNO) t
+             join SALGRADE s on t.avg_sal<=s.HISAL and t.avg_sal>=s.LOSAL);
+
+# 8、取得比普通员工(员工代码没有在 mgr 字段上出现的) 的最高薪水还要高的领导人姓名
+select *
+from EMP e
+where e.EMPNO in
+      (select distinct (e.MGR)
+       from EMP e where e.MGR is not null)
+and e.SAL>
+    (select max(e.SAL)
+    from EMP e
+    where e.EMPNO not in
+        (select distinct (e.MGR)
+        from EMP e where e.MGR is not null));
+
+# 9、取得薪水最高的前五名员工
+select e.ENAME, e.SAL
+from EMP e
+order by e.SAL desc
+limit 0, 5;
+# 10、取得薪水最高的第六到第十名员工
+select e.ENAME, e.SAL
+from EMP e
+order by e.SAL desc
+limit 5, 5;
+# 11、取得最后入职的 5 名员工
+select e.ENAME, e.HIREDATE
+from EMP e
+order by HIREDATE desc
+limit 5;
+
+
+
+
+
+
+
+
