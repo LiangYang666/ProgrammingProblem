@@ -37,4 +37,27 @@ public class M008和大于等于target的最短子数组 {
         return (minLength==Integer.MAX_VALUE)?0:minLength;
     }
 
+    public int minSubArrayLen2(int target, int[] nums) {     //前缀和 二分法
+        int n = nums.length;
+        int minLength = Integer.MAX_VALUE;
+        int[] sums = new int[n+1];
+        for (int i = 0; i < n; i++) {
+            sums[i+1] = sums[i]+nums[i];
+        }
+        for (int i = 0; i < n+1; i++) {
+            int l=i+1;
+            int r=n;
+            int t=sums[i]+target;
+            while (l<=r){
+                int m = (l+r)>>1;
+                if(sums[m]>=t){
+                    minLength = Math.min(minLength, m-i);
+                    r = m-1;
+                } else{
+                    l=m+1;
+                }
+            }
+        }
+        return (minLength==Integer.MAX_VALUE)?0:minLength;
+    }
 }
