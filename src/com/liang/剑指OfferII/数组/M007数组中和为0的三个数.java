@@ -5,7 +5,7 @@ import java.util.Arrays;
 import java.util.List;
 
 public class M007数组中和为0的三个数 {
-    public List<List<Integer>> threeSum(int[] nums) {   // 三层循环
+    public List<List<Integer>> threeSum2(int[] nums) {   // 三层循环
         ArrayList<List<Integer>> rs = new ArrayList<>();
         Arrays.sort(nums);
         int n = nums.length;
@@ -23,17 +23,54 @@ public class M007数组中和为0的三个数 {
                 while (l<=r){
                     int m = (l+r)/2;
                     if (target==nums[m]){
-                        ArrayList<Integer> rsTemp = new ArrayList<>();
-                        rsTemp.add(nums[i]);
-                        rsTemp.add(nums[j]);
-                        rsTemp.add(nums[m]);
-                        rs.add(rsTemp);
+                        rs.add(Arrays.asList(nums[i], nums[l], nums[r]));
                         break;
                     } else if (target<nums[m]){
                         r = m-1;
                     } else {
                         l = m+1;
                     }
+                }
+            }
+        }
+        return rs;
+    }
+    public List<List<Integer>> threeSum(int[] nums) {   // 双指针
+
+        ArrayList<List<Integer>> rs = new ArrayList<>();
+        Arrays.sort(nums);
+        int n = nums.length;
+        for (int i = 0; i < n - 2; i++) {
+            if(i!=0 && nums[i]==nums[i-1])  continue;
+            int l = i+1;
+            int r = n-1;
+            boolean lFlag = false;
+            boolean rFlag = false;
+            while (l<r){
+                if ((nums[i]+nums[l]+nums[r])==0){
+                    ArrayList<Integer> rsTemp = new ArrayList<>();
+                    rsTemp.add(nums[i]);
+                    rsTemp.add(nums[l]);
+                    rsTemp.add(nums[r]);
+                    rs.add(rsTemp);
+                    lFlag = true;
+                    rFlag = true;
+                } else if((nums[i]+nums[l]+nums[r])<0){
+                    lFlag = true;
+                } else rFlag = true;
+                if(lFlag){
+                    l++;
+                    while (l<r && nums[l]==nums[l-1]){
+                        l++;
+                    }
+                    lFlag=false;
+                }
+                if (rFlag){
+                    r--;
+                    while (l<r && nums[r]==nums[r+1]){
+                        r--;
+                    }
+                    rFlag=false;
                 }
             }
         }
