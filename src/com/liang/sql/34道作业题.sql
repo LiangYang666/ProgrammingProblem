@@ -244,6 +244,117 @@ from EMP e
 order by HIREDATE desc
 limit 5;
 
+# 12、取得每个薪水等级有多少员工
+select s.GRADE, count(*)
+from
+EMP e
+join SALGRADE s
+on e.SAL between s.LOSAL and s.HISAL
+group by s.GRADE;
+
+# 13、面试题：
+# 有 3 个表 S(学生表)，C（课程表），SC（学生选课表）
+# S（SNO，SNAME）代表（学号，姓名）
+# C（CNO，CNAME，CTEACHER）代表（课号，课名，教师）
+# SC（SNO，CNO，SCGRADE）代表（学号，课号，成绩）
+# 问题：
+# 1，找出没选过“黎明”老师的所有学生姓名。
+# 2，列出 2 门以上（含2 门）不及格学生姓名及平均成绩。
+# 3，即学过 1 号课程又学过 2 号课所有学生的姓名。
+
+# 14、列出所有员工及领导的姓名
+select e.ENAME '员工', ep.ENAME '领导'
+from EMP e
+join EMP ep
+on e.MGR=ep.EMPNO;
+
+# 15、列出受雇日期早于其直接上级的所有员工的编号,姓名,部门名称
+select e.ENAME,d.DNAME  
+from EMP e
+join EMP b
+on e.MGR=b.EMPNO
+join DEPT d
+on e.DEPTNO=d.DEPTNO
+where e.HIREDATE<b.HIREDATE;
+
+# 16、 列出部门名称和这些部门的员工信息, 同时列出那些没有员工的部门
+select d.DNAME, e.*
+from EMP e
+right join DEPT d
+on e.DEPTNO=d.DEPTNO;
+
+# 17、列出至少有 5 个员工的所有部门
+# 按照部门编号分组，计数，筛选出 >= 5
+select *
+from
+    (select d.DNAME, count(*) total
+    from EMP e
+    join DEPT d on e.DEPTNO = d.DEPTNO
+    group by e.DEPTNO)  t
+where t.total>=5;
+
+# 使用having
+select d.DNAME, count(*) total
+from EMP e
+join DEPT d on e.DEPTNO=d.DEPTNO
+group by e.DEPTNO
+having total>=5;
+
+# 18、列出薪金比"SMITH" 多的所有员工信息
+select e.ENAME, e.SAL
+from EMP e
+where e.SAL>
+    (select e.SAL
+    from EMP e
+    where e.ENAME='SMITH');
+
+select a.ENAME, a.SAL
+from EMP a
+join EMP b
+on b.ENAME='SMITH'
+where a.SAL>b.SAL;
+
+# 19、 列出所有"CLERK"( 办事员) 的姓名及其部门名称, 部门的人数
+select e.ENAME, t.DNAME, t.total
+from EMP e
+join
+     (select d.DEPTNO, d.DNAME, count(*) total
+      from EMP e
+               join DEPT d
+                    on e.DEPTNO=d.DEPTNO
+      group by e.DEPTNO) t
+on e.DEPTNO=t.DEPTNO
+where e.JOB='CLERK';
+
+# 20、列出最低薪金大于 1500 的各种工作及从事此工作的全部雇员人数
+select e.JOB, min(e.SAL) min_sal, count(*) total
+from EMP e
+group by e.JOB
+having min_sal>1500;
+
+# 21、列出在部门"SALES"< 销售部> 工作的员工的姓名, 假定不知道销售部的部门编号.
+select d.DNAME, e.ENAME
+from EMP e
+join DEPT d
+on e.DEPTNO=d.DEPTNO
+where d.DNAME='SALES';
+
+select e.ENAME
+from EMP e
+where e.DEPTNO=(select DEPTNO from DEPT where DNAME='SALES');
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
