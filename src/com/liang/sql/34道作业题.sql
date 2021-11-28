@@ -343,8 +343,65 @@ select e.ENAME
 from EMP e
 where e.DEPTNO=(select DEPTNO from DEPT where DNAME='SALES');
 
+# 22、列出薪金高于公司平均薪金的所有员工, 所在部门, 上级领导, 雇员的工资等级.
 
+select e.ENAME, d.DNAME, b.ENAME '领导', s.GRADE
+from EMP e
+join DEPT d
+on e.DEPTNO=d.DEPTNO
+join EMP b
+on e.MGR=b.EMPNO
+join SALGRADE s
+on e.SAL between s.LOSAL and s.HISAL
+where e.SAL >= (select avg(SAL) from EMP);
 
+# 23、 列出与"SCOTT" 从事相同工作的所有员工及部门名称
+select e.ENAME, e.JOB, d.DNAME
+from EMP e
+join DEPT d
+on e.DEPTNO=d.DEPTNO
+where e.JOB=(select e.JOB from EMP e where e.ENAME='SCOTT')
+and e.ENAME!='SCOTT';
+
+# 24、列出薪金等于部门 30 中员工的薪金的其他员工的姓名和薪金.
+select distinct e.SAL
+from EMP e
+where e.DEPTNO=30;
+select *
+from EMP e
+where e.SAL in  (select distinct e.SAL
+                 from EMP e
+                 where e.DEPTNO=30)
+and e.DEPTNO<>30;
+select *
+from EMP e
+right join (select distinct e.SAL
+            from EMP e
+            where e.DEPTNO=30) t
+on e.SAL=t.SAL
+where e.DEPTNO<>30;
+
+# 25、列出薪金高于在部门 30 工作的所有员工的薪金的员工姓名和薪金. 部门名称
+select e.ENAME, e.SAL, d.DNAME
+from EMP e
+join DEPT d
+on d.DEPTNO=e.DEPTNO
+where e.SAL>(select max(e.SAL)
+             from EMP e
+             where e.DEPTNO=30)
+and e.DEPTNO<>30;
+
+# 26、列出在每个部门工作的员工数量, 平均工资和平均服务期限
+select *
+from DEPT d
+left join (select e.DEPTNO, count(*) total, avg(e.SAL), avg(datediff( now(), e.HIREDATE)) '服务时长'
+           from EMP e
+           group by e.DEPTNO) t
+on d.DEPTNO=t.DEPTNO;
+
+select e.DEPTNO, count(*) total, avg(e.SAL), avg(datediff( now(), e.HIREDATE)) '服务时长'
+from EMP e
+group by e.DEPTNO;
 
 
 
