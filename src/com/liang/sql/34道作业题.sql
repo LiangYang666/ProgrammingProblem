@@ -392,17 +392,48 @@ where e.SAL>(select max(e.SAL)
 and e.DEPTNO<>30;
 
 # 26、列出在每个部门工作的员工数量, 平均工资和平均服务期限
-select *
+# 没有员工的部门，部门人数是0
+select d.DEPTNO, d.DNAME, ifnull(t.total, 0) , ifnull(t.avg_sal, 0), ifnull(t.服务时长, 0)
 from DEPT d
-left join (select e.DEPTNO, count(*) total, avg(e.SAL), avg(datediff( now(), e.HIREDATE)) '服务时长'
+left join (select e.DEPTNO, count(*) total, avg(e.SAL) avg_sal, avg(timestampdiff(year, e.HIREDATE , now())) '服务时长'
            from EMP e
            group by e.DEPTNO) t
 on d.DEPTNO=t.DEPTNO;
 
-select e.DEPTNO, count(*) total, avg(e.SAL), avg(datediff( now(), e.HIREDATE)) '服务时长'
+select e.DEPTNO, ifnull(count(*), 0) total, ifnull(avg(e.SAL), 0), ifnull(avg(datediff( now(), e.HIREDATE)), 0) '服务时长'
 from EMP e
 group by e.DEPTNO;
 
+
+# 27、 列出所有员工的姓名、部门名称和工资。
+select e.ENAME, d.DNAME, e.SAL
+from EMP e
+join DEPT d
+on d.DEPTNO=e.DEPTNO;
+
+# 28、列出所有部门的详细信息和人数
+select *
+from EMP e;
+
+select d.*, ifnull(t.total, 0) as total
+from
+DEPT d
+left join
+    (select e.DEPTNO DEPTNO, count(*) total
+    from EMP e
+    right join DEPT d
+    on e.DEPTNO=d.DEPTNO
+    group by e.DEPTNO) t
+on t.DEPTNO=d.DEPTNO;
+
+# 29、列出各种工作的最低工资及从事此工作的雇员姓名
+select e.ENAME, t.*
+from EMP e
+right join
+(select e.job, min(e.SAL) as sal
+from EMP e
+group by e.JOB) t
+on t.sal=e.SAL and t.JOB=e.JOB;
 
 
 
