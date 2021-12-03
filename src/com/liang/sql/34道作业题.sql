@@ -435,6 +435,40 @@ from EMP e
 group by e.JOB) t
 on t.sal=e.SAL and t.JOB=e.JOB;
 
+# 30、列出各个部门的 MANAGER( 领导) 的最低薪金
+select e.DEPTNO, min(e.SAL)
+from EMP e
+where e.JOB='MANAGER'
+group by e.DEPTNO;
+
+# 31 列出所有员工的 年工资, 按 年薪从低到高排序
+select e.ENAME, e.SAL*12 sal_year
+from EMP e
+order by e.SAL ;
+
+# 32、求出员工领导的薪水超过3000的员工名称与领导
+select e.ENAME, t.ENAME
+from EMP e
+inner join
+    (select e.EMPNO,e.ENAME
+    from EMP e
+    where e.SAL>3000) t
+on e.MGR=t.EMPNO;
+
+select e.ENAME, b.ENAME
+from EMP e
+join EMP b
+on e.MGR=b.EMPNO
+where b.SAL>3000;
+
+# 33、求出部门名称中, 带'S'字符的部门员工的工资合计、部门人数
+select avg(SAL), count(*)
+from EMP e
+join DEPT d
+on e.DEPTNO=d.DEPTNO
+where d.DNAME like '%S%';
+
+
 
 
 
