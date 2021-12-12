@@ -462,11 +462,21 @@ on e.MGR=b.EMPNO
 where b.SAL>3000;
 
 # 33、求出部门名称中, 带'S'字符的部门员工的工资合计、部门人数
-select avg(SAL), count(*)
+select d.DNAME,ifnull(avg(SAL), 0) sal, count(e.ENAME) name
 from EMP e
-join DEPT d
+right join DEPT d
 on e.DEPTNO=d.DEPTNO
-where d.DNAME like '%S%';
+where d.DNAME like '%S%'
+group by d.DEPTNO;
+
+# 34、给任职日期超过 30 年的员工加薪 10%.
+select e.ENAME, e.HIREDATE, timestampdiff(year, e.HIREDATE, now())
+from EMP e
+where timestampdiff(year, e.HIREDATE, now())>=40;
+
+update EMP e set e.SAL=e.SAL+10
+where timestampdiff(year, e.HIREDATE, now())>=40;
+
 
 
 
