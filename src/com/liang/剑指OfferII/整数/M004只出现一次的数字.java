@@ -27,4 +27,30 @@ public class M004只出现一次的数字 {
         return ans;
     }
 
+    //二刷
+    //排序
+    public int singleNumber2(int[] nums){
+        Arrays.sort(nums);
+        for (int i = 0; i < nums.length-3; i+=3) {
+            if (nums[i]!=nums[i+1]) return nums[i];
+        }
+        return nums[nums.length-1];
+    }
+    //二进制
+    public int singleNumber3(int[] nums){
+        int rs = 0;
+        for (int i = 0; i < 32; i++) {
+            int tempTotal = 0;
+            for (int j = 0; j < nums.length; j++) {
+                if((nums[j]>>>i&1)==1){
+                    tempTotal+=1;
+                }
+            }
+            if(tempTotal%3!=0){
+                rs|=1<<i;
+            }
+        }
+        return rs;
+    }
+
 }
