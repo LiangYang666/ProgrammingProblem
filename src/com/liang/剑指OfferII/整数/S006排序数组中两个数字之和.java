@@ -1,25 +1,21 @@
 package com.liang.剑指OfferII.整数;
 
 public class S006排序数组中两个数字之和 {
-    public int[] twoSum(int[] numbers, int target) {
-        int n = numbers.length;
-        for (int i = 0; i < n-1; i++) {
-            int j = haveTarget(numbers,target-numbers[i], i+1, n-1);
-            if(j!=-1) return new int[] {i,j};
+
+    public int[] twoSum2(int[] numbers, int target) {
+        for (int i = 0; i < numbers.length-1; i++) {
+            int temp = findTarget(numbers, i+1, numbers.length, target-numbers[i]);
+            if (temp!=-1)   return new int[] {1,2};
         }
-        return new int[] {1,2};
+        return new int[0];
     }
-    public int haveTarget(int[] numbers, int target, int l, int r){
-        while (l<=r){
-            int m = (l+r)/2;
-            if (target==numbers[m]){
-//                System.out.println(target);
-                return m;
-            } else if(target<numbers[m]){
-                r = m-1;
-            } else{
-                l = m+1;
-            }
+    public int findTarget(int[] numbers, int l, int r, int target){
+
+        while(l<=r){
+            int m = (l+r)>>2;
+            if (numbers[m]==target) return m;
+            else if (numbers[m]<target) l=m+1;
+            else r=m-1;
         }
         return -1;
     }
