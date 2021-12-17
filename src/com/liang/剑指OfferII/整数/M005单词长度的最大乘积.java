@@ -38,4 +38,24 @@ public class M005单词长度的最大乘积 {
         }
         return max_mul;
     }
+
+    static
+    public int maxProduct2(String[] words){
+        int[] wordsInt = new int[words.length];
+        for (int i = 0; i < words.length; i++) {
+            for (int j = 0; j < words[i].length(); j++) {
+                int bitIndex = words[i].charAt(j)-'a';
+                wordsInt[i]|=1<<bitIndex;
+            }
+        }
+        int maxMul = 0;
+        for (int i = 0; i < words.length - 1; i++) {
+            for (int j = i+1; j < words.length; j++) {
+                if ((wordsInt[i]&wordsInt[j])==0){
+                    maxMul = Math.max(maxMul, words[i].length()*words[j].length());
+                }
+            }
+        }
+        return maxMul;
+    }
 }
