@@ -76,4 +76,49 @@ public class M007数组中和为0的三个数 {
         }
         return rs;
     }
-}
+
+    public List<List<Integer>> threeSum3(int[] nums) {
+        Arrays.sort(nums);
+        ArrayList<List<Integer>> rs = new ArrayList<>();
+        int n = nums.length;
+        for (int i = 0; i < n-2; i++) {
+            if(i!=0 && nums[i]==nums[i-1])  continue;
+            int l = i+1;
+            int r = n-1;
+            while (l<r){
+                boolean leftFlag = false;
+                boolean rightFlag = false;
+                int now_total = nums[i]+nums[l]+nums[r];
+                System.out.println(now_total);
+                if (now_total==0){
+                    ArrayList<Integer> temp = new ArrayList<>(3);
+                    temp.add(nums[i]);
+                    temp.add(nums[l]);
+                    temp.add(nums[r]);
+                    rs.add(temp);
+                    leftFlag = true;
+                    rightFlag = true;
+                    l++;
+                    r--;
+                } else if (now_total<0){
+                    leftFlag = true;
+                    l++;
+                } else {
+                    rightFlag = true;
+                    r--;
+                }
+                while (leftFlag && l<r && nums[l]==nums[l-1]){
+                    l++;
+                }
+                while (rightFlag && l<r && nums[r]==nums[r+1]){
+                    r--;
+                }
+            }
+        }
+        return rs;
+
+    }
+
+
+
+    }
