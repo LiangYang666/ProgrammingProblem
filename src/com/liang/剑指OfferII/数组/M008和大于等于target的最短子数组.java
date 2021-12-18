@@ -60,4 +60,24 @@ public class M008和大于等于target的最短子数组 {
         }
         return (minLength==Integer.MAX_VALUE)?0:minLength;
     }
+
+    public int minSubArrayLen3(int target, int[] nums){
+        int n=nums.length;
+        int l = 0;
+        int r = 0;
+        int min_length = Integer.MAX_VALUE;
+        int total_now = nums[0];
+        for (l = 0; l < n; l++) {
+            while (total_now<target){
+                r++;
+                if (r==n) return min_length==Integer.MAX_VALUE?0:min_length;
+                total_now+=nums[r];
+            }
+            System.out.println(total_now);
+            min_length = Math.min(min_length, r-l+1);
+            total_now -= nums[l];
+        }
+        return min_length==Integer.MAX_VALUE?0:min_length;
+    }
+
 }
