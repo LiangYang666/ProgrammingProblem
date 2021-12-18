@@ -2,6 +2,23 @@ package com.liang.剑指OfferII.整数;
 
 public class S006排序数组中两个数字之和 {
 
+    public int[] twoSum(int[] numbers, int target) {
+        int n = numbers.length;
+        int l=0, r=n-1;
+        while (l<r){
+            int now_total = numbers[l]+numbers[r];
+            if (now_total==target){
+                return new int[]{l, r};
+            } else if (now_total<target){
+                l++;
+            } else {
+                r--;
+            }
+        }
+        return new int[0];
+
+    }
+
     public int[] twoSum2(int[] numbers, int target) {
         for (int i = 0; i < numbers.length-1; i++) {
             int temp = findTarget(numbers, i+1, numbers.length, target-numbers[i]);
@@ -19,5 +36,4 @@ public class S006排序数组中两个数字之和 {
         }
         return -1;
     }
-
 }
