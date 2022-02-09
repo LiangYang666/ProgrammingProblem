@@ -1,4 +1,4 @@
-package com.liang.剑指OfferII.链表;
+package com.liang.剑指OfferII.哈希表;
 
 import com.liang.utils.ListNode;
 
