@@ -1,6 +1,8 @@
 package com.liang.面试知识点.多线程;
 
 
+import java.util.concurrent.Callable;
+
 /**
  * @ProjectName: ProgrammingProblem
  * @Package: com.liang.面试知识点.多线程
@@ -29,6 +31,7 @@ public class RunnableDemo implements Runnable {
         }
     }
 
+
     public static void main(String[] args) {
         RunnableDemo runnableDemo1 = new RunnableDemo("run-1");
         Thread thread1 = new Thread(runnableDemo1, "th-1");
@@ -40,4 +43,3 @@ public class RunnableDemo implements Runnable {
         thread2.start();
     }
 }
-
