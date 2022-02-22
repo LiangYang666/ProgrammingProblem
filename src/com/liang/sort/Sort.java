@@ -9,22 +9,66 @@ public class Sort {
     public static void main(String[] args) {
         Sort sort = new Sort();
         int[] arr1 = {1,5,4,5,4,6,2,6,4,5,1,7,9,5,6,4,34,3,88,43,9,75,2};
-//        sort.insertionSort(arr1);
-        sort.quickSort(arr1, 0, arr1.length-1);
+//        sort.quickSort(arr1, 0, arr1.length-1);
+//        sort.bubbleSort(arr1);
+//        sort.selectSort(arr1);
+//        sort.insertSort(arr1);
+        sort.shellSort(arr1);
         System.out.println(Arrays.toString(arr1));
     }
-    public void insertionSort(int[] array){
-        for (int i = 1; i < array.length; i++) {
-            for (int j = i; j > 0; j--) {
-                if(array[j]<array[j-1]){
-                    int temp = array[j];
-                    array[j] = array[j-1];
-                    array[j-1] = temp;
+    public void bubbleSort(int[] arr){
+        for (int i = arr.length; i > 0; i--) {
+            for (int j = 1; j < i; j++) {
+                if (arr[j]<arr[j-1]){
+                    int swap = arr[j];
+                    arr[j] = arr[j-1];
+                    arr[j-1] = swap;
                 }
             }
         }
     }
-    public void quickSort(int[] arr, int low, int high){
+    public void selectSort(int[] arr){
+        for (int i = 0; i < arr.length; i++) {
+            int min = arr[i];
+            int minIndex = i;
+            for (int j = i; j < arr.length; j++) {
+                if (arr[j]<min){
+                    min = arr[j];
+                    minIndex = j;
+                }
+            }
+            int swap = arr[minIndex];
+            arr[minIndex] = arr[i];
+            arr[i] = swap;
+        }
+    }
+    public void insertSort(int[] arr){
+        for (int i = 1; i < arr.length; i++) {
+            for (int j = i; j > 0; j--) {
+                if (arr[j]<arr[j-1]){
+                    int swap = arr[j];
+                    arr[j] = arr[j-1];
+                    arr[j-1] = swap;
+                }
+            }
+        }
+    }
+    public void shellSort(int[] arr){
+        int step = arr.length;
+        while ((step/=2)>0){
+            for (int i = step; i < arr.length ; i++) {
+                for (int j = i; j > step ; j--) {
+                    if (arr[j]<arr[j-step]){
+                        int swap = arr[j];
+                        arr[j] = arr[j-step];
+                        arr[j-step] = swap;
+                    }
+                }
+            }
+        }
+    }
+
+    public void quickSort(int[] arr, int low, int high){    //Top K n个
         int i, j, temp;
         if(low>=high){
             return;
