@@ -114,6 +114,9 @@ commit;
 # =================================================================///
 # 1、取得每个部门最高薪水的人员名称
 select d.* from DEPT d;
+select DEPTNO,count(*)
+from EMP e
+group by DEPTNO;
 select  d.DNAME, max(SAL) from EMP e join DEPT d on e.DEPTNO=d.DEPTNO group by DNAME;
 select d.DNAME, t.*
 from
