@@ -1,5 +1,7 @@
 package com.liang.面试知识点.aop.jdkproxy;
 
+import com.liang.utils.ListNode;
+
 import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.Method;
 import java.lang.reflect.Proxy;
@@ -32,7 +34,8 @@ public class JdkProxy implements InvocationHandler {
         UserManagerImpl userManager = new UserManagerImpl();
         JdkProxy jdkProxy = new JdkProxy(userManager);
         UserManager user = (UserManager) Proxy.newProxyInstance(
-                userManager.getClass().getClassLoader(),
+                ListNode.class.getClassLoader(),      //任意
+//                userManager.getClass().getClassLoader(),      //任意
                 userManager.getClass().getInterfaces(),
                 jdkProxy);
         user.addUser("name", "123");

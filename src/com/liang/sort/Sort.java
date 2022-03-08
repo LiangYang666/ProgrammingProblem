@@ -94,4 +94,28 @@ public class Sort {
         quickSort(arr, low, i-1);
         quickSort(arr, i+1, high);
     }
+
+    public void heapSort(int[] arr){
+        for (int i=arr.length/2-1;i>=0;i--){
+
+        }
+    }
+    public void adjustHeap(int[] arr, int i, int length){
+        int temp = arr[i];
+        for (int k = i*2+1; k < length; k=k*2+1) {
+            if (k+1 < length && arr[k]<arr[k+1]){
+                k++;
+            }
+            if (arr[k]>temp){
+                arr[i] = arr[k];
+                i=k;
+            } else {
+                break;
+            }
+        }
+        arr[i] = temp;
+    }
+
+
+
 }
