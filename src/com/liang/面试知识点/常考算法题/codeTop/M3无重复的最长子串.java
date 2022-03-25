@@ -1,4 +1,4 @@
-package com.liang.codeTop;
+package com.liang.面试知识点.常考算法题.codeTop;
 
 public class M3无重复的最长子串 {
     public int lengthOfLongestSubstring(String s) {

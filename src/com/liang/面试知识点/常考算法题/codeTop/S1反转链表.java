@@ -1,10 +1,10 @@
-package com.liang.codeTop;
+package com.liang.面试知识点.常考算法题.codeTop;
 
 import com.liang.utils.ListNode;
 
 /**
  * @ProjectName: ProgrammingProblem
- * @Package: com.liang.codeTop
+ * @Package: com.liang.面试知识点.常考算法题.codeTop
  * @ClassName: T1反转链表
  * @Description:
  * @Author: Yang Liang
