@@ -1,4 +1,4 @@
-package com.liang.笔试.拼多多;
+package com.liang.笔试真题.拼多多;
 
 public class Main4 {
     public static void main(String[] args) {

@@ -1,6 +1,5 @@
-package com.liang.笔试.拼多多;
+package com.liang.笔试真题.拼多多;
 
-import java.util.HashSet;
 import java.util.Scanner;
 
 public class Main3 {

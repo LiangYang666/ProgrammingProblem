@@ -1,4 +1,4 @@
-package com.liang.笔试.阿里云实习面试;
+package com.liang.笔试真题.阿里云实习面试;
 
 import java.util.Scanner;
 

@@ -1,6 +1,5 @@
-package com.liang.笔试.牛客阿里4星;
+package com.liang.笔试真题.牛客阿里4星;
 
-import java.util.Arrays;
 import java.util.Scanner;
 
 public class 小强爱数学 {
