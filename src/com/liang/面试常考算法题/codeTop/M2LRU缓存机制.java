@@ -1,4 +1,4 @@
-package com.liang.面试知识点.常考算法题.codeTop;
+package com.liang.面试常考算法题.codeTop;
 
 import java.util.HashMap;
 

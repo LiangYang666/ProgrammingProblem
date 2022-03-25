@@ -1,8 +1,8 @@
-package com.liang.面试知识点.常考算法题.codeTop;
+package com.liang.面试常考算法题.codeTop;
 
 /**
  * @ProjectName: ProgrammingProblem
- * @Package: com.liang.面试知识点.常考算法题.codeTop
+ * @Package: com.liang.常考算法题.codeTop
  * @ClassName: M数组中的第K个最大元素
  * @Description:
  * @Author: Yang Liang
