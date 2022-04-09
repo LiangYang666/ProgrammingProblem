@@ -1,5 +1,7 @@
 package com.liang.面试知识点.单例模式;
 
+import java.util.concurrent.ConcurrentHashMap;
+
 /**
  * @ProjectName: ProgrammingProblem
  * @Package: com.liang.面试知识点.单例模式

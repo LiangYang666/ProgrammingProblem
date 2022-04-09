@@ -1,5 +1,10 @@
 package com.liang.面试知识点.类.内部类实现多继承;
 
+import java.io.Serializable;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
+
 /**
  * @ProjectName: ProgrammingProblem
  * @Package: com.liang.面试知识点.类.内部类实现多继承
