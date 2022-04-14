@@ -106,7 +106,7 @@ public class Sort {
         }
         int i=l, j=m+1;
         for (int k = l; k <= r; k++) {
-            if(j==r+1||(i<m+1 && tmp[i]<tmp[j])){
+            if(j==r+1||(i<m+1 && tmp[i]<=tmp[j])){
                 nums[k] = tmp[i++];
             } else {
                 nums[k] = tmp[j++];
