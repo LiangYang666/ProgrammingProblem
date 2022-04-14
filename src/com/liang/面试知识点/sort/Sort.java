@@ -14,7 +14,8 @@ public class Sort {
 //        sort.bubbleSort(arr1);
 //        sort.selectSort(arr1);
 //        sort.insertSort(arr1);
-        sort.shellSort(arr1);
+//        sort.shellSort(arr1);
+        sort.mergeSort(arr1, new int[arr1.length], 0, arr1.length-1);
         System.out.println(Arrays.toString(arr1));
     }
     public void bubbleSort(int[] arr){
@@ -95,6 +96,23 @@ public class Sort {
         quickSort(arr, low, i-1);
         quickSort(arr, i+1, high);
     }
+    public void mergeSort(int[] nums, int[] tmp, int l, int r){
+        if (l>=r)   return;
+        int m = (l+r)>>1;
+        mergeSort(nums, tmp, l, m);
+        mergeSort(nums, tmp, m+1, r);
+        for (int i = l; i <= r; i++) {
+            tmp[i] = nums[i];
+        }
+        int i=l, j=m+1;
+        for (int k = l; k <= r; k++) {
+            if(j==r+1||(i<m+1 && tmp[i]<tmp[j])){
+                nums[k] = tmp[i++];
+            } else {
+                nums[k] = tmp[j++];
+            }
+        }
+    }
 
     public void heapSort(int[] arr){
         for (int i=arr.length/2-1;i>=0;i--){
@@ -116,6 +134,7 @@ public class Sort {
         }
         arr[i] = temp;
     }
+
 
 
 
