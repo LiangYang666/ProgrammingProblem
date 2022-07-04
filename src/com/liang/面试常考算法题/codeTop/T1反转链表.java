@@ -11,7 +11,7 @@ import com.liang.utils.ListNode;
  * @CreateDate: 2022/2/22 8:45
  * @Version: 1.0
  */
-public class S1反转链表 {
+public class T1反转链表 {
     public ListNode reverseList0(ListNode head) {    //迭代方法
         if (head==null) return null;
         ListNode next;
