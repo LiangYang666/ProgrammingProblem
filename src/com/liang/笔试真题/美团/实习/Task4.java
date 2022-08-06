@@ -1,4 +1,4 @@
-package com.liang.笔试真题.美团;
+package com.liang.笔试真题.美团.实习;
 
 import java.util.Arrays;
 import java.util.Scanner;
