@@ -15,14 +15,18 @@ import java.util.concurrent.FutureTask;
  */
 
 class CallableDemo implements Callable<Integer>{
+    private final int a;
+    public CallableDemo(int a) {
+        this.a = a;
+    }
 
     @Override
     public Integer call() throws Exception {
-        return 2;
+        return a;
     }
 
     public static void main(String[] args) {
-        FutureTask<Integer> task = new FutureTask<>(new CallableDemo());
+        FutureTask<Integer> task = new FutureTask<>(new CallableDemo(3));
         Thread t = new Thread(task, "AA");
         t.start();
         try {
