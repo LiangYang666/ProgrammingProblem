@@ -1,8 +1,6 @@
 package com.liang.面试知识点.多线程;
 
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
-import java.util.concurrent.ThreadPoolExecutor;
+import java.util.concurrent.*;
 
 /**
  * @ProjectName: ProgrammingProblem
@@ -16,6 +14,7 @@ import java.util.concurrent.ThreadPoolExecutor;
 public class ThreadPoolDemo {
     public static void main(String[] args) {
         ExecutorService executor = Executors.newFixedThreadPool(5);
+//      ExecutorService executor =  new ThreadPoolExecutor(5, 5, 0L, TimeUnit.MILLISECONDS, new LinkedBlockingQueue<Runnable>());
 //        new ThreadPoolExecutor()
         for (int i = 0; i < 10; i++) {
             executor.execute(()->{
