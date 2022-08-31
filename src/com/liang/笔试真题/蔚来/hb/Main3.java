@@ -19,20 +19,29 @@ public class Main3 {
         int n = sc.nextInt();
         int m = sc.nextInt();
         boolean[] isA = new boolean[m];
+        int BSum = 0;
         for (int i = 0; i < m; i++) {
             if (sc.next().equals("A"))  isA[i] = true;
+            else BSum++;
         }
         LinkedList<Integer> list = new LinkedList<>();
         for (int i = 1; i < n+1; i++) {
             list.addLast(i);
         }
+        int tempSum = 0;
         for (int i = 0; i < m; i++) {
             if (isA[i]){
-                list.addLast(list.remove(0));
+                if (tempSum%2==0){
+                    list.addLast(list.removeFirst());
+                } else {
+                    list.addFirst(list.removeLast());
+                }
+                tempSum=0;
             } else {
-                Collections.reverse(list);
+                tempSum++;
             }
         }
+        if (BSum%2!=0)  Collections.reverse(list);
         for (int i = 0; i < list.size(); i++) {
             System.out.println(list.get(i));
         }
