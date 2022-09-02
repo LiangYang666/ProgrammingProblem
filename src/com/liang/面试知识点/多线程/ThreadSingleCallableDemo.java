@@ -14,9 +14,9 @@ import java.util.concurrent.FutureTask;
  * @Version: 1.0
  */
 
-class CallableDemo implements Callable<Integer>{
+class ThreadSingleCallableDemo implements Callable<Integer>{
     private final int a;
-    public CallableDemo(int a) {
+    public ThreadSingleCallableDemo(int a) {
         this.a = a;
     }
 
@@ -26,7 +26,7 @@ class CallableDemo implements Callable<Integer>{
     }
 
     public static void main(String[] args) {
-        FutureTask<Integer> task = new FutureTask<>(new CallableDemo(3));
+        FutureTask<Integer> task = new FutureTask<>(new ThreadSingleCallableDemo(3));
         Thread t = new Thread(task, "AA");
         t.start();
         try {

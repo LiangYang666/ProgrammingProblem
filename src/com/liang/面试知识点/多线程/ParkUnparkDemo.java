@@ -17,7 +17,7 @@ public class ParkUnparkDemo {
         }, "t1");
         t1.start();
 
-        Thread.sleep(2000);
+        Thread.sleep(200);     // 改成200和2000都能够执行（代表park类似于信号量，unpark可以在前）
         System.out.println("unpark...");
         LockSupport.unpark(t1); // 指定恢复t1
     }

@@ -27,7 +27,7 @@ public class ThreadPoolCallable {
             // 创建多个返回值的任务
             List<Future> list = new ArrayList<>();
             for (int i = 1; i <= taskSize; i++) {
-                CallableDemo callable = new CallableDemo(new Integer(i));
+                ThreadSingleCallableDemo callable = new ThreadSingleCallableDemo(new Integer(i));
                 Future<Integer> future = pool.submit(callable);
                 list.add(future);
                 System.out.println("已添加" + i);
