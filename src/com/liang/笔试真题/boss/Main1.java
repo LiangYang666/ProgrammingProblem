@@ -11,7 +11,6 @@ public class Main1 {
             if (a%i==0 && b%i==0){
                 System.out.println(a*b/i);
                 break;
-
             }
         }
     }
