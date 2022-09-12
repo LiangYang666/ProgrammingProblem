@@ -6,7 +6,7 @@ import java.util.PriorityQueue;
 
 public class Sep04_309_2402会议室III {
     public int mostBooked(int n, int[][] meetings) {
-        Comparator<int[]> comparator = new Comparator<>() {
+        Comparator<int[]> comparator = new Comparator<int[]>() {
             @Override
             public int compare(int[] o1, int[] o2) {
                 if (o1[0] == o2[0]) {
