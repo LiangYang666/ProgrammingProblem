@@ -1,4 +1,4 @@
-package com.liang.笔试真题.网易.雷火诚哥;
+package com.liang.笔试真题.网易.雷火lc;
 
 import java.util.Arrays;
 
