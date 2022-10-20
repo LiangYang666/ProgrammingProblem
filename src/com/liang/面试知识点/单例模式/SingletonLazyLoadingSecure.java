@@ -12,7 +12,7 @@ import java.util.concurrent.ConcurrentHashMap;
  * @Version: 1.0
  */
 public class SingletonLazyLoadingSecure {
-    private static SingletonLazyLoadingSecure instance;
+    private static volatile SingletonLazyLoadingSecure instance;
     public static SingletonLazyLoadingSecure getInstance(){
         if (instance==null){
             synchronized (SingletonLazyLoadingSecure.class){
